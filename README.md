@@ -1,123 +1,119 @@
-# **Projeto Arte ASCII - Analisador de Polkadots**  
+# **ASCII Art Project - Polkadots Analyzer**  
 
-Este projeto implementa um sistema de análise de arte ASCII que identifica e conta *polkadots* seguindo regras específicas de pontuação. Desenvolvido como parte de um desafio de engenharia de IA, ele demonstra:  
+This project implements an ASCII art analysis system that identifies and counts *polkadots* following specific scoring rules. Developed as part of an AI engineering challenge, it demonstrates:  
 
-✅ **Arquitetura limpa** (separação de modelos, serviços e lógica principal)  
-✅ **Testabilidade** (testes unitários para todas as componentes)  
-✅ **Extensibilidade** (fácil adaptação para novos formatos de arte)  
+✅ **Clean architecture** (separation of models, services and core logic)  
+✅ **Testability** (unit tests for all components)  
+✅ **Extensibility** (easy adaptation for new art formats)  
 
 ---
 
-## 📂 **Estrutura do Projeto**  
+## 📂 **Project Structure**  
 ```
-/projeto_arte_ascii/
+/ascii_art_project/
 │
-├── /data/                     # Camada de dados
-│   └── angelica_art.txt       # Arte ASCII original
+├── /data/                     # Data layer
+│   └── angelica_art.txt       # Original ASCII art
 │
-├── /src/                      # Código fonte principal
+├── /src/                      # Core source code
 │   ├── __init__.py
 │   ├── models.py              # Data classes (LipsCoordinates, PolkadotScoreResult)
-│   ├── services.py            # Serviços (detector, contador, renderizador)
-│   ├── analyzer.py            # Lógica central (PolkadotAnalyzer)
-│   └── main.py                # Ponto de entrada CLI
+│   ├── services.py            # Services (detector, counter, renderer)
+│   ├── analyzer.py            # Core logic (PolkadotAnalyzer)
+│   └── main.py                # CLI entry point
 │
-├── /tests/                    # Testes unitários
+├── /tests/                    # Unit tests
 │   ├── __init__.py
-│   └── test_analyzer.py       # Testes de integração
+│   └── test_analyzer.py       # Integration tests
 │
 ├── .gitignore
-├── requirements.txt           # Dependências (Python 3.8+)
-└── README.md                  # Documentação
+├── requirements.txt           # Dependencies (Python 3.8+)
+└── README.md                  # Documentation
 ```
 
 ---
 
-## ⚙️ **Instalação e Uso**  
+## ⚙️ **Installation & Usage**  
 
-### Pré-requisitos  
+### Prerequisites  
 - Python 3.8+  
-- Git (opcional)  
+- Git (optional)  
 
-### Passos:  
+### Steps:  
 ```bash
-# 1. Clone o repositório (ou baixe manualmente)
+# 1. Clone the repository (or download manually)
 git clone https://github.com/kleberimeusp/ai-engineer-challenge.git
-cd ai-engineer-challenge/projeto_arte_ascii
+cd ai-engineer-challenge/ascii_art_project
 
-# 2. Configure o ambiente (recomendado)
+# 2. Set up the environment (recommended)
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 venv\Scripts\activate     # Windows
 
-# 3. Instale dependências
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Execute o analisador
+# 4. Run the analyzer
 python -m src.main
 ```
 
-**Saída esperada:**  
+**Expected output:**  
 ```plaintext
-=== Arte ASCII ===
-(Arte renderizada no terminal...)
-=== Resultados ===
-🔵 Pontos normais: 23
-🔴 Pontos duplos: 12
-🏆 Pontuação total: 47
+=== ASCII Art ===
+(Art rendered in terminal...)
+=== Results ===
+🔵 Normal dots: 23
+🔴 Double dots: 12
+🏆 Total score: 47
 ```
 
 ---
 
-## 🧠 **Design Técnico**  
+## 🧠 **Technical Design**  
 
-### Camadas Principais  
-| Arquivo       | Função                                |  
-|---------------|---------------------------------------|  
-| `models.py`   | Define estruturas de dados imutáveis (`@dataclass`) |  
-| `services.py` | Contém:  <br> • `LipsLineDetector` (detecta `–`)<br> • `DressPolkadotCounter` (conta `O`)<br> • `ConsoleArtRenderer` |  
-| `analyzer.py` | Orquestra o fluxo: `detect() → count() → render()` |  
+### Core Layers  
+| File         | Function                                |  
+|--------------|-----------------------------------------|  
+| `models.py`  | Defines immutable data structures (`@dataclass`) |  
+| `services.py` | Contains:  <br> • `LipsLineDetector` (detects `–`)<br> • `DressPolkadotCounter` (counts `O`)<br> • `ConsoleArtRenderer` |  
+| `analyzer.py` | Orchestrates flow: `detect() → count() → render()` |  
 
-### Regras de Negócio  
-- **Linha dos lábios**: Identificada pelo caractere `–`  
-- **Pontuação**:  
-  - `O` fora dos lábios → **1 ponto**  
-  - `O` entre `start_x` e `end_x` → **2 pontos**  
+### Business Rules  
+- **Lips line**: Identified by `–` character  
+- **Scoring**:  
+  - `O` outside lips → **1 point**  
+  - `O` between `start_x` and `end_x` → **2 points**  
 
 ---
 
-## 🧪 **Testes**  
+## 🧪 **Tests**  
 ```bash
-# Execute todos os testes
+# Run all tests
 python -m unittest discover tests
 ```  
-**Cobertura:**  
-✔ Testes para detecção de lábios  
-✔ Validação da contagem de pontos  
-✔ Cálculo correto da pontuação  
+**Coverage:**  
+✔ Lips detection tests  
+✔ Dot counting validation  
+✔ Correct score calculation  
 
 ---
 
-## 🛠 **Extensibilidade**  
-### Casos de Uso Avançados  
+## 🛠 **Extensibility**  
+### Advanced Use Cases  
 ```python  
-# Exemplo: Adicionar suporte a JSON  
+# Example: Add JSON support  
 class JSONExporter:  
     def export(self, result: PolkadotScoreResult) -> str:  
         return json.dumps(asdict(result))  
 
-# Uso:  
+# Usage:  
 analyzer = PolkadotAnalyzer(exporter=JSONExporter())  
 ```  
 
 ---
 
-## 📜 **Licença**  
-MIT License - Disponível para uso e modificação.  
+## 📜 **License**  
+MIT License - Free for use and modification.  
 
-**Desenvolvido por:** [Kleber I.](https://github.com/kleberimeusp)  
-**Repositório:** [github.com/kleberimeusp/ai-engineer-challenge](https://github.com/kleberimeusp/ai-engineer-challenge)  
-
---- 
-
-✨ **Dúvidas?** Abra uma *issue* no GitHub!
+**Developed by:** [Kleber Augusto](https://github.com/kleberimeusp)  
+**Repository:** [github.com/kleberimeusp/ai-engineer-challenge](https://github.com/kleberimeusp/ai-engineer-challenge)  

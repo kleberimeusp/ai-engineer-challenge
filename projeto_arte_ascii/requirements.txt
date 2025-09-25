@@ -1,0 +1,2 @@
+# Dependências do projeto
+python >= 3.8

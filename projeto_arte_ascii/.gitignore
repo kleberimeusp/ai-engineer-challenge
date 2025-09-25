@@ -1,0 +1,60 @@
+# .gitignore para o Projeto Arte ASCII
+
+# Ambiente virtual Python
+venv/
+.venv/
+env/
+ENV/
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+.python-version
+
+# Arquivos de IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+*.DS_Store
+
+# Arquivos de desenvolvimento
+*.log
+*.pot
+*.pyc
+*.pyd
+*.pyo
+
+# Arquivos gerados pelo pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos de build/distribuição
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Arquivos de configuração sensíveis
+.env
+secrets.ini
+config.ini
+
+# Arquivos temporários
+*.tmp
+*.bak
+*~
+
+# Arquivos de banco de dados/SQLite
+*.db
+*.sqlite
+
+# Arquivos de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Arquivos de sistema operacional
+Thumbs.db
+ehthumbs.db
+Desktop.ini
